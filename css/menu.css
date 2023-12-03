@@ -1,0 +1,16 @@
+.menu {
+    display: block;
+}
+
+.wrap-menu {
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items    : center;
+    gap            : 20px;
+    padding-top    : 20px;
+}
+
+.btn-menu {
+    font-size: 18px;
+}

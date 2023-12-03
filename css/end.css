@@ -1,0 +1,56 @@
+#iconBanner {
+    width : auto;
+    height: 50px;
+}
+
+.title-score {
+    margin-top: 5px;
+    font-size : 14px;
+}
+
+.card-content p {
+    margin-bottom: 8px;
+}
+
+#level {
+    color: #BF5933;
+}
+
+#score {
+    color: #BF5933;
+}
+
+.wrap-main button {
+    margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 1200px) {
+    #iconBanner {
+        width : auto;
+        height: 80px;
+    }
+
+    .title-score {
+        margin-top: 5px;
+        font-size : 26px;
+    }
+
+    .card-content p {
+        font-size    : 24px;
+        margin-bottom: 8px;
+    }
+
+    #level {
+        font-size: 24px;
+        color    : #BF5933;
+    }
+
+    #score {
+        font-size: 24px;
+        color    : #BF5933;
+    }
+
+    .wrap-main button {
+        margin-bottom: 10px;
+    }
+}

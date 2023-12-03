@@ -1,0 +1,16 @@
+th,
+td {
+    font-size: 12px;
+    font-family: 'Lato',
+        sans-serif;
+}
+
+.card-content>#scoreUser {
+    font-size: 14px;
+    font-family: 'Lato',
+        sans-serif !important;
+}
+
+.card-content {
+    overflow-x: hidden;
+}
