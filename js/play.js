@@ -83,10 +83,11 @@ function display() {
   input2.innerHTML = num2;
 
   mathJari.innerHTML = "";
-
+  // num1 to img
   let imgNum1 = document.createElement("img");
   imgNum1.src = `asset/img/gambarjari_${num1}.png`;
   mathJari.appendChild(imgNum1);
+  // num2 to img
   let imgNum2 = document.createElement("img");
   imgNum2.src = `asset/img/gambarjari_${num2}.png`;
   mathJari.appendChild(imgNum2);
@@ -101,7 +102,7 @@ function display() {
   }
 }
 display();
-
+// menampilkan input img
 userInput.addEventListener("input", () => {
   mathJariInput.innerHTML = "";
   let numInput = document.createElement("img");
@@ -115,6 +116,7 @@ userInput.addEventListener("input", () => {
   }
 });
 
+// memvalidasi pemain
 function validate() {
   let correctAnswer = eval(
     input1.innerHTML + operatorElement.innerHTML + input2.innerHTML
@@ -131,7 +133,7 @@ function validate() {
     progressBarrFull.style.width = `${
       (currentQuestion / MAX_QUESTIONS) * 100
     }%`;
-    if (currentQuestion > 15) {
+    if (currentQuestion >= 15) {
       endGame();
     }
   } else if (userValue == "") {
@@ -188,6 +190,7 @@ function endGame() {
   localStorage.setItem("dataPlayers", JSON.stringify(loadData));
   window.location.href = "/end.html";
 }
+
 function gameOver() {
   const players = localStorage.getItem("username");
   const loadData = JSON.parse(localStorage.getItem("dataPlayers"));

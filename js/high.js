@@ -9,12 +9,13 @@ if (dataPlayers) {
     nama,
     data,
   }));
-
+  // validasi data rangking
   dataArray.sort(
     (a, b) => b.data.score - a.data.score && b.data.level - a.data.level
   );
-
+  //menampilkan rangking 1-10
   highScoresList.innerHTML = dataArray
+    .slice(0, 10)
     .map(
       (item, index) =>
         `<tr><th scope = "row">${index + 1}</th><th>${item.nama}</th><th>Lv ${
