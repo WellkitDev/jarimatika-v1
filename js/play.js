@@ -188,7 +188,7 @@ function endGame() {
     timeSpant: timeSpant,
   };
   localStorage.setItem("dataPlayers", JSON.stringify(loadData));
-  window.location.href = "/end.html";
+  window.location.href = "end.html";
 }
 
 function gameOver() {
@@ -212,7 +212,7 @@ function gameOver() {
     timeSpant: timeSpant,
   };
   localStorage.setItem("dataPlayers", JSON.stringify(loadData));
-  window.location.href = "/gameover.html";
+  window.location.href = "gameover.html";
 }
 
 checkAnswerBtn.addEventListener("click", validate);
