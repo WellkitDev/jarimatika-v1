@@ -116,6 +116,53 @@ userInput.addEventListener("input", () => {
   }
 });
 
+function endGame() {
+  const players = localStorage.getItem("username");
+  const loadData = JSON.parse(localStorage.getItem("dataPlayers"));
+  let totalScore = "";
+  let levelUp = "";
+  let timeSpant = 150 - countDown;
+
+  if (loadData[players]) {
+    totalScore = userScore + loadData[players].score;
+    levelUp = loadData[players].level;
+  } else {
+    totalScore = userScore;
+    levelUp = levelId;
+  }
+
+  loadData[players] = {
+    level: levelUp,
+    score: totalScore,
+    timeSpant: timeSpant,
+  };
+  localStorage.setItem("dataPlayers", JSON.stringify(loadData));
+  window.location.href = "end.html";
+}
+
+function gameOver() {
+  const players = localStorage.getItem("username");
+  const loadData = JSON.parse(localStorage.getItem("dataPlayers"));
+  let totalScore = "";
+  let levelUp = "";
+  let timeSpant = 150 - countDown;
+
+  if (loadData[players]) {
+    totalScore = userScore + loadData[players].score;
+    levelUp = loadData[players].level;
+  } else {
+    totalScore = userScore;
+    levelUp = levelId;
+  }
+
+  loadData[players] = {
+    level: levelUp,
+    score: totalScore,
+    timeSpant: timeSpant,
+  };
+  localStorage.setItem("dataPlayers", JSON.stringify(loadData));
+  window.location.href = "gameover.html";
+}
 // memvalidasi pemain
 function validate() {
   let correctAnswer = eval(
@@ -165,54 +212,6 @@ function runInterval() {
       gameOver();
     }
   }, 1000);
-}
-
-function endGame() {
-  const players = localStorage.getItem("username");
-  const loadData = JSON.parse(localStorage.getItem("dataPlayers"));
-  let totalScore = "";
-  let levelUp = "";
-  let timeSpant = 150 - countDown;
-
-  if (loadData[players]) {
-    totalScore = userScore + loadData[players].score;
-    levelUp = loadData[players].level;
-  } else {
-    totalScore = userScore;
-    levelUp = levelId;
-  }
-
-  loadData[players] = {
-    level: levelUp,
-    score: totalScore,
-    timeSpant: timeSpant,
-  };
-  localStorage.setItem("dataPlayers", JSON.stringify(loadData));
-  window.location.href = "end.html";
-}
-
-function gameOver() {
-  const players = localStorage.getItem("username");
-  const loadData = JSON.parse(localStorage.getItem("dataPlayers"));
-  let totalScore = "";
-  let levelUp = "";
-  let timeSpant = 150 - countDown;
-
-  if (loadData[players]) {
-    totalScore = userScore + loadData[players].score;
-    levelUp = loadData[players].level;
-  } else {
-    totalScore = userScore;
-    levelUp = levelId;
-  }
-
-  loadData[players] = {
-    level: levelUp,
-    score: totalScore,
-    timeSpant: timeSpant,
-  };
-  localStorage.setItem("dataPlayers", JSON.stringify(loadData));
-  window.location.href = "gameover.html";
 }
 
 checkAnswerBtn.addEventListener("click", validate);
