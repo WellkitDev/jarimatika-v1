@@ -28,5 +28,5 @@ if (dataPlayers) {
   userScoresList.innerHTML = `${dataPlayer.nama} - Lv ${dataPlayer.data.level} - ${dataPlayer.data.score} p`;
 }
 function backToHome() {
-  window.location.href = "/menu.html";
+  window.location.href = "menu.html";
 }

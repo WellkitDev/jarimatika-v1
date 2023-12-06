@@ -35,8 +35,8 @@ function generateRandomOperation() {
   representation.appendChild(imgResult);
 }
 function backToHome() {
-  window.location.href = "/menu.html";
+  window.location.href = "menu.html";
 }
 function play() {
-  window.location.href = "/play.html";
+  window.location.href = "play.html";
 }
