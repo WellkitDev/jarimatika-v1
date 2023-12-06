@@ -16,12 +16,12 @@ function createAccount() {
   //validasi inputan
   if (nickName.trim() != "") {
     const displayName = JSON.parse(dataPlayer);
+    localStorage.setItem("username", nickName);
 
     //cek player dengan nama inputan ada atau tidak
     if (displayName[nickName]) {
       alertElement4.classList.remove("d-none");
     } else {
-      localStorage.setItem("username", nickName);
       alertElement2.classList.remove("d-none");
       window.location.href = "/menu.html";
     }
