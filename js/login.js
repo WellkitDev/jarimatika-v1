@@ -15,9 +15,8 @@ function createAccount() {
   const nickName = document.getElementById("username").value;
   //validasi inputan
   if (nickName.trim() != "") {
-    const displayName = JSON.parse(dataPlayer);
     localStorage.setItem("username", nickName);
-
+    const displayName = JSON.parse(dataPlayer);
     //cek player dengan nama inputan ada atau tidak
     if (displayName[nickName]) {
       alertElement4.classList.remove("d-none");
@@ -41,7 +40,7 @@ function handleLogin() {
     if (displayName[nickName]) {
       alertElement3.classList.remove("d-none");
       localStorage.setItem("username", nickName);
-      window.location.href = "/menu.html";
+      window.location.href = "menu.html";
     } else {
       alertElement5.classList.remove("d-none");
     }
