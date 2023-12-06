@@ -1,8 +1,8 @@
-const alertElement1 = document.getElementById("alertNull");
-const alertElement2 = document.getElementById("alertCreate");
-const alertElement3 = document.getElementById("alertLogin");
-const alertElement4 = document.getElementById("alertCheck");
-const alertElement5 = document.getElementById("alertInfo");
+let alertElement1 = document.getElementById("alertNull");
+let alertElement2 = document.getElementById("alertCreate");
+let alertElement3 = document.getElementById("alertLogin");
+let alertElement4 = document.getElementById("alertCheck");
+let alertElement5 = document.getElementById("alertInfo");
 
 function createAccount() {
   const nickName = document.getElementById("username").value;
