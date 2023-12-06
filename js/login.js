@@ -23,7 +23,7 @@ function createAccount() {
       alertElement4.classList.remove("d-none");
     } else {
       alertElement2.classList.remove("d-none");
-      window.location.href = "/menu.html";
+      window.location.href = "menu.html";
     }
   } else {
     alertElement1.classList.remove("d-none");
