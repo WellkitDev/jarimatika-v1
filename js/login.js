@@ -4,15 +4,15 @@ let alertElement3 = document.getElementById("alertLogin");
 let alertElement4 = document.getElementById("alertCheck");
 let alertElement5 = document.getElementById("alertInfo");
 
+const dataPlayer = localStorage.getItem("dataPlayers");
+
+//cek data pleyer ada atau tidak
+if (dataPlayer == null) {
+  localStorage.setItem("dataPlayers", JSON.stringify({}));
+}
+
 function createAccount() {
   const nickName = document.getElementById("username").value;
-  const dataPlayer = localStorage.getItem("dataPlayers");
-
-  //cek data pleyer ada atau tidak
-  if (dataPlayer == null) {
-    localStorage.setItem("dataPlayers", JSON.stringify({}));
-  }
-
   //validasi inputan
   if (nickName.trim() != "") {
     const displayName = JSON.parse(dataPlayer);
