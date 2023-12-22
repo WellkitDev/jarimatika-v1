@@ -214,6 +214,10 @@ function runInterval() {
   }, 1000);
 }
 
+function backToHome() {
+  window.location.href = "menu.html";
+}
+
 checkAnswerBtn.addEventListener("click", validate);
 
 userInput.addEventListener("keyup", (e) => {
@@ -225,6 +229,3 @@ userInput.addEventListener("keyup", (e) => {
     validate();
   }
 });
-function backToHome() {
-  window.location.href = "/menu.html";
-}
