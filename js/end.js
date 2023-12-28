@@ -16,16 +16,7 @@ function display() {
   }
 }
 display();
-function backToHome() {
-  window.location.href = "menu.html";
-}
 
-function highScore() {
-  window.location.href = "highscore.html";
-}
-function tryAgain() {
-  window.location.href = "play.html";
-}
 function nextLevel() {
   let level = dataPlayers[nickName].level;
   let score = dataPlayers[nickName].score;
@@ -40,7 +31,8 @@ function nextLevel() {
     };
     localStorage.setItem("dataPlayers", JSON.stringify(dataPlayers));
     //console.log(`levelUp ${dataPlayers}`);
-    window.location.href = "play.html";
+
+    window.location.href = "playV2.html";
   } else {
     nextElement.classList.add("d-none");
     alert("You have completed all levels!");

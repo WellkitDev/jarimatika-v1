@@ -58,13 +58,30 @@
                             <!-- display inputjari -->
                         </div>
                     </div>
-                    <div class="display-column">
+                    <div class="display-column d-none" id="quiz">
                         <div class="display-item">
                             <p id="input1" class="item">10</p>
                             <p id="operator" class="item">+</p>
                             <p id="input2" class="item">10</p>
                             <p id="symbol" class="item">=</p>
                             <input type="number" class="user-input" id="userInput" required placeholder="?">
+                        </div>
+                    </div>
+                    <div class="display-column " id="quiz1">
+                        <!-- <div class="display-item">
+                            <p id="input1" class="item">10</p>
+                            <p id="operator" class="item">+</p>
+                            <p id="input2" class="item">10</p>
+                            <p id="symbol" class="item">=</p>
+                            <p id="symbol" class="item">?</p>
+                        </div> -->
+                        <div class="answer-option">
+                            <h1 id="choice1">A</h1>
+                            <div id="option1"></div>
+                            <h1 id="choice1">B</h1>
+                            <div id="option2"></div>
+                            <h1 id="choice1">C</h1>
+                            <div id="option3"></div>
                         </div>
                     </div>
                 </div>
@@ -76,7 +93,7 @@
                 <span id="progressTimerText">150 S</span>
             </div>
             <button id="back" onclick="backToHome()" type="button" class="btn">Home</button>
-            <button id="check" type="button" class="btn">Check</button>
+
 
         </div>
         <!-- end main -->
@@ -85,7 +102,7 @@
 
 
 
-    <script src="js/play.js"></script>
+    <script src="js/playv2.js"></script>
     <script src="js/btnOption.js"></script>
 
     <!-- Script bundel bootstrap -->

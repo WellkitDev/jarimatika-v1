@@ -55,6 +55,12 @@
     width : auto;
     height: 35px;
 }
+#option1 img,
+#option2 img,
+#option3 img {
+    width : auto;
+    height: 35px;
+}
 
 #mathJariInput {
     display        : flex;

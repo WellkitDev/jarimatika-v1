@@ -34,9 +34,3 @@ function generateRandomOperation() {
   imgResult.src = "asset/img/gambarjari_" + result + ".png"; // Assuming you have separate images for each sum
   representation.appendChild(imgResult);
 }
-function backToHome() {
-  window.location.href = "menu.html";
-}
-function play() {
-  window.location.href = "play.html";
-}

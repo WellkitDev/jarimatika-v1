@@ -1,23 +1,39 @@
-const levelElement = document.getElementById("level");
+const quizElement = document.getElementById("quiz");
+const quizElement1 = document.getElementById("quiz1");
+
 const nameTag = document.getElementById("userTag");
-const levelId = 1;
+const levelElement = document.getElementById("level");
+let levelId = 1;
+
+let questionElement = document.getElementById("progressText");
+let progressBarrFull = document.getElementById("progressBarrFull");
+let currentQuestion = 0;
+let MAX_QUESTIONS = 15;
+
+let score = document.getElementById("score");
+let userScore = 0;
+
 let input1 = document.getElementById("input1");
 let input2 = document.getElementById("input2");
 let userInput = document.getElementById("userInput");
-const operatorElement = document.getElementById("operator");
-const checkAnswerBtn = document.getElementById("check");
-let score = document.getElementById("score");
-let userScore = 0;
-let countDown = 150;
-let countDownElement = document.getElementById("progressTimerText");
-let progressTimerBar = document.getElementById("progressTimerBar");
-let currentQuestion = 0;
-let questionElement = document.getElementById("progressText");
-let progressBarrFull = document.getElementById("progressBarrFull");
+
+let option1 = document.getElementById("option1");
+let option2 = document.getElementById("option2");
+let option3 = document.getElementById("option3");
+
 let mathJari = document.getElementById("mathJari");
 let mathJariInput = document.getElementById("mathJariInput");
+
+const operatorElement = document.getElementById("operator");
+const checkAnswerBtn = document.getElementById("check");
+
+let countDownElement = document.getElementById("progressTimerText");
+let progressTimerBar = document.getElementById("progressTimerBar");
+let countDown = 150;
+
+let finalAnswer = 0;
+
 let inputted = false;
-const MAX_QUESTIONS = 15;
 
 function checkName() {
   const nickName = localStorage.getItem("username");
@@ -39,7 +55,6 @@ function checkName() {
     }
   }
 }
-checkName();
 
 function randomNum() {
   const nickName = localStorage.getItem("username");
@@ -62,59 +77,110 @@ function randomNum() {
   }
 }
 
+randomNum();
+
 function randomOperator() {
   const operators = ["+", "-"];
   const randomOp = operators[Math.floor(Math.random() * operators.length)];
 
   return randomOp;
 }
+
 randomOperator();
-randomNum();
-function display() {
+
+questionLevel2 = () => {
   let num1 = randomNum();
   let num2 = randomNum();
-  const operator = randomOperator();
-  const finalAnswer = eval(num1 + operator + num2);
+  let dummyAnswer1 = randomNum();
+  let dummyAnswer2 = randomNum();
+  let operator = randomOperator();
+  let allAnswer = [];
+  let switchAnswer = [];
 
-  operatorElement.innerHTML = operator;
+  finalAnswer = eval(num1 + operator + num2);
+  if (operator == "-" && num1 < num2) {
+    finalAnswer = eval(num2 - num1);
+  }
+
   questionElement.innerHTML = `Question ${currentQuestion} of 15`;
 
-  input1.innerHTML = num1;
-  input2.innerHTML = num2;
-
   mathJari.innerHTML = "";
+
   // num1 to img
   let imgNum1 = document.createElement("img");
   imgNum1.src = `asset/img/gambarjari_${num1}.png`;
   mathJari.appendChild(imgNum1);
+
+  let operators = document.createElement("h1");
+  operators.textContent = `${operator}`;
+  mathJari.appendChild(operators);
+
   // num2 to img
   let imgNum2 = document.createElement("img");
   imgNum2.src = `asset/img/gambarjari_${num2}.png`;
   mathJari.appendChild(imgNum2);
 
   if (operator == "-" && num1 < num2) {
-    input1.innerHTML = num2;
-    input2.innerHTML = num1;
+    imgNum1.src = `asset/img/gambarjari_${num2}.png`;
+    imgNum2.src = `asset/img/gambarjari_${num1}.png`;
   }
 
+  allAnswer = [finalAnswer, dummyAnswer1, dummyAnswer2];
+
+  for (i = allAnswer.length; i--; ) {
+    switchAnswer.push(
+      allAnswer.splice(Math.floor(Math.random() * (i + 1)), 1)[0]
+    );
+  }
+
+  option1.innerHTML = "";
+  let numImg1 = document.createElement("img");
+  numImg1.src = `asset/img/gambarjari_${switchAnswer[0]}.png`;
+  option1.appendChild(numImg1);
+
+  option2.innerHTML = "";
+  let numImg2 = document.createElement("img");
+  numImg2.src = `asset/img/gambarjari_${switchAnswer[1]}.png`;
+  option2.appendChild(numImg2);
+
+  option3.innerHTML = "";
+  let numImg3 = document.createElement("img");
+  numImg3.src = `asset/img/gambarjari_${switchAnswer[2]}.png`;
+  option3.appendChild(numImg3);
+
+  option1.addEventListener("click", function () {
+    checkAnswer(switchAnswer[0]);
+  });
+  option2.addEventListener("click", function () {
+    checkAnswer(switchAnswer[1]);
+  });
+  option3.addEventListener("click", function () {
+    checkAnswer(switchAnswer[2]);
+  });
+
   if (finalAnswer > 200 || finalAnswer < 0) {
-    display();
+    questionLevel2();
+  }
+};
+
+questionLevel2();
+
+function checkAnswer(answer) {
+  if (answer == finalAnswer) {
+    currentQuestion++;
+    userScore += 100;
+
+    score.innerHTML = `${userScore}`;
+    questionElement.innerHTML = `Question ${currentQuestion} of 15`;
+    progressBarrFull.style.width = `${
+      (currentQuestion / MAX_QUESTIONS) * 100
+    }%`;
+    questionLevel2();
+    if (currentQuestion > 15) {
+      endGame();
+    }
   }
 }
-display();
-// menampilkan input img
-userInput.addEventListener("input", () => {
-  mathJariInput.innerHTML = "";
-  let numInput = document.createElement("img");
-  numInput.src = `asset/img/gambarjari_${userInput.value}.png`;
-  mathJariInput.appendChild(numInput);
-  if (userInput.value >= 100) {
-    numInput.src = `asset/img/gambarjari_.png`;
-  }
-  if (userInput.value == "") {
-    numInput.src = `asset/img/gambarjari_.png`;
-  }
-});
 
 function endGame() {
   const players = localStorage.getItem("username");
@@ -163,69 +229,3 @@ function gameOver() {
   localStorage.setItem("dataPlayers", JSON.stringify(loadData));
   window.location.href = "gameover.html";
 }
-// memvalidasi pemain
-function validate() {
-  let correctAnswer = eval(
-    input1.innerHTML + operatorElement.innerHTML + input2.innerHTML
-  );
-  let userValue = parseFloat(userInput.value);
-
-  if (userValue == correctAnswer) {
-    display();
-    currentQuestion++;
-    userScore += 100;
-
-    score.innerHTML = `${userScore}`;
-    questionElement.innerHTML = `Question ${currentQuestion} of 15`;
-    progressBarrFull.style.width = `${
-      (currentQuestion / MAX_QUESTIONS) * 100
-    }%`;
-    if (currentQuestion >= 15) {
-      endGame();
-    }
-  } else if (userValue == "") {
-    alert("Enter a value");
-  } else {
-    alert(`Incorrect, it was answer ${correctAnswer}`);
-    display();
-    userScore -= 100;
-
-    score.innerHTML = `${userScore}`;
-
-    if (userScore < 0) {
-      alert("Score cant be negative, Game Over!!");
-      gameOver();
-    }
-  }
-  userInput.value = "";
-}
-
-function runInterval() {
-  let timerInterval = setInterval(() => {
-    countDown--;
-    countDownElement.innerHTML = `${countDown} s`;
-    progressTimerBar.style.width = `${(countDown / 150) * 100}%`;
-
-    if (countDown <= 0) {
-      alert(`Game Over!!. You scored ${userScore} points`);
-      clearInterval(timerInterval);
-      gameOver();
-    }
-  }, 1000);
-}
-
-function backToHome() {
-  window.location.href = "menu.html";
-}
-
-checkAnswerBtn.addEventListener("click", validate);
-
-userInput.addEventListener("keyup", (e) => {
-  if (!inputted) {
-    runInterval();
-    inputted = true;
-  }
-  if (e.key == "Enter") {
-    validate();
-  }
-});
