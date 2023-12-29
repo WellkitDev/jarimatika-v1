@@ -17,8 +17,11 @@ function createAccount() {
         icon: "success",
         title: "WOW...",
         text: "Nice nickname ",
+      }).then((isOkay) => {
+        if (isOkay) {
+          window.location.href = "menu.html";
+        }
       });
-      window.location.href = "menu.html";
     } else {
       Swal.fire({
         icon: "error",
