@@ -158,39 +158,53 @@ questionLevel2 = () => {
     checkAnswer(switchAnswer[2]);
   });
 };
-
+questionLevel2();
 function checkAnswer(answer) {
   if (answer == finalAnswer) {
-    Swal.fire({
-      icon: "success",
-      title: "WOW...",
-      text: "Good Job",
-    });
+    questionLevel2();
+
     currentQuestion++;
     userScore += 100;
-    runInterval();
+
     score.innerHTML = `${userScore}`;
     questionElement.innerHTML = `Question ${currentQuestion} of 15`;
     progressBarrFull.style.width = `${
       (currentQuestion / MAX_QUESTIONS) * 100
     }%`;
 
-    questionLevel2();
-
     if (currentQuestion > 15) {
-      endGame();
+      Swal.fire({
+        icon: "success",
+        title: "Greedt...",
+        text: "Good job",
+        buttons: true,
+      }).then((isOkay) => {
+        if (isOkay) {
+          endGame();
+        }
+      });
     }
   } else {
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Your answer is Incorrect",
-    });
+    questionLevel2();
     userScore -= 100;
-    return;
+    score.innerHTML = `${userScore}`;
+
+    if (userScore < 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Opss...",
+        text: "Time Out!!",
+        buttons: true,
+      }).then((isOkay) => {
+        if (isOkay) {
+          gameOver();
+        }
+      });
+    }
   }
+  runInterval();
 }
-questionLevel2();
+
 function endGame() {
   const players = localStorage.getItem("username");
   const loadData = JSON.parse(localStorage.getItem("dataPlayers"));

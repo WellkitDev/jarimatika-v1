@@ -181,7 +181,16 @@ function validate() {
       (currentQuestion / MAX_QUESTIONS) * 100
     }%`;
     if (currentQuestion >= 15) {
-      endGame();
+      Swal.fire({
+        icon: "success",
+        title: "Greedt...",
+        text: "Good job",
+        buttons: true,
+      }).then((isOkay) => {
+        if (isOkay) {
+          endGame();
+        }
+      });
     }
   } else {
     Swal.fire({
@@ -199,9 +208,13 @@ function validate() {
       Swal.fire({
         icon: "error",
         title: "Opss...",
-        text: "Score cant be negative, Game Over!!",
+        text: "Time Out!!",
+        buttons: true,
+      }).then((isOkay) => {
+        if (isOkay) {
+          gameOver();
+        }
       });
-      gameOver();
     }
   }
 }
