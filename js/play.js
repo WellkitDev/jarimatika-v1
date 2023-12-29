@@ -183,21 +183,27 @@ function validate() {
     if (currentQuestion >= 15) {
       endGame();
     }
-  } else if (userValue == "") {
-    alert("Enter a value");
   } else {
-    alert(`Incorrect, it was answer ${correctAnswer}`);
+    Swal.fire({
+      icon: "error",
+      title: "Opss...",
+      text: `Incorrect, it was answer ${correctAnswer}`,
+    });
+    // alert(`Incorrect, it was answer ${correctAnswer}`);
     display();
     userScore -= 100;
 
     score.innerHTML = `${userScore}`;
 
     if (userScore < 0) {
-      alert("Score cant be negative, Game Over!!");
+      Swal.fire({
+        icon: "error",
+        title: "Opss...",
+        text: "Score cant be negative, Game Over!!",
+      });
       gameOver();
     }
   }
-  userInput.value = "";
 }
 
 function runInterval() {
@@ -207,15 +213,16 @@ function runInterval() {
     progressTimerBar.style.width = `${(countDown / 150) * 100}%`;
 
     if (countDown <= 0) {
-      alert(`Game Over!!. You scored ${userScore} points`);
+      Swal.fire({
+        icon: "error",
+        title: "Opss...",
+        text: "Time Out!!",
+      });
+
       clearInterval(timerInterval);
       gameOver();
     }
   }, 1000);
-}
-
-function backToHome() {
-  window.location.href = "menu.html";
 }
 
 checkAnswerBtn.addEventListener("click", validate);

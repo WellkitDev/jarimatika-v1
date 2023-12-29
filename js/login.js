@@ -1,9 +1,3 @@
-let alertElement1 = document.getElementById("alertNull");
-let alertElement2 = document.getElementById("alertCreate");
-let alertElement3 = document.getElementById("alertLogin");
-let alertElement4 = document.getElementById("alertCheck");
-let alertElement5 = document.getElementById("alertInfo");
-
 const dataPlayer = localStorage.getItem("dataPlayers");
 
 //cek data pleyer ada atau tidak
@@ -19,13 +13,25 @@ function createAccount() {
     const displayName = JSON.parse(dataPlayer);
     //cek player dengan nama inputan ada atau tidak
     if (displayName[nickName]) {
-      alertElement4.classList.remove("d-none");
+      Swal.fire({
+        icon: "error",
+        title: "Opss...",
+        text: "Nickname already in use ",
+      });
     } else {
-      alertElement2.classList.remove("d-none");
+      Swal.fire({
+        icon: "success",
+        title: "WOW...",
+        text: "Nice nickname ",
+      });
       window.location.href = "menu.html";
     }
   } else {
-    alertElement1.classList.remove("d-none");
+    Swal.fire({
+      icon: "error",
+      title: "Opss...",
+      text: "Nickname dont empty",
+    });
   }
 }
 
@@ -38,13 +44,20 @@ function handleLogin() {
 
     //cek nickname ada atau tidak
     if (displayName[nickName]) {
-      alertElement3.classList.remove("d-none");
       localStorage.setItem("username", nickName);
       window.location.href = "menu.html";
     } else {
-      alertElement5.classList.remove("d-none");
+      Swal.fire({
+        icon: "error",
+        title: "Opss...",
+        text: "Your Nickname does not exist",
+      });
     }
   } else {
-    alertElement1.classList.remove("d-none");
+    Swal.fire({
+      icon: "error",
+      title: "Opss...",
+      text: "Nickname dont empty",
+    });
   }
 }

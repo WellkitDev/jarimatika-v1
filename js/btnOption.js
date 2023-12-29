@@ -13,10 +13,11 @@ function play() {
 }
 
 function tryAgain() {
-  if (levelUser > 1) {
+  if (dataPlayers[nickName].level > 1) {
     window.location.href = "playV2.html";
+  } else {
+    window.location.href = "play.html";
   }
-  window.location.href = "play.html";
 }
 
 function highScore() {
@@ -33,8 +34,4 @@ function closeWin() {
 
 function backToHome() {
   window.location.href = "menu.html";
-}
-
-function highScore() {
-  window.location.href = "highscore.html";
 }

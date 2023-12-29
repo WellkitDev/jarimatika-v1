@@ -157,31 +157,40 @@ questionLevel2 = () => {
   option3.addEventListener("click", function () {
     checkAnswer(switchAnswer[2]);
   });
-
-  if (finalAnswer > 200 || finalAnswer < 0) {
-    questionLevel2();
-  }
 };
-
-questionLevel2();
 
 function checkAnswer(answer) {
   if (answer == finalAnswer) {
+    Swal.fire({
+      icon: "success",
+      title: "WOW...",
+      text: "Good Job",
+    });
     currentQuestion++;
     userScore += 100;
-
+    runInterval();
     score.innerHTML = `${userScore}`;
     questionElement.innerHTML = `Question ${currentQuestion} of 15`;
     progressBarrFull.style.width = `${
       (currentQuestion / MAX_QUESTIONS) * 100
     }%`;
+
     questionLevel2();
+
     if (currentQuestion > 15) {
       endGame();
     }
+  } else {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Your answer is Incorrect",
+    });
+    userScore -= 100;
+    return;
   }
 }
-
+questionLevel2();
 function endGame() {
   const players = localStorage.getItem("username");
   const loadData = JSON.parse(localStorage.getItem("dataPlayers"));
@@ -228,4 +237,23 @@ function gameOver() {
   };
   localStorage.setItem("dataPlayers", JSON.stringify(loadData));
   window.location.href = "gameover.html";
+}
+
+function runInterval() {
+  let timerInterval = setInterval(() => {
+    countDown--;
+    countDownElement.innerHTML = `${countDown} s`;
+    progressTimerBar.style.width = `${(countDown / 150) * 100}%`;
+
+    if (countDown <= 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Opss...",
+        text: "Time Out!!",
+      });
+
+      clearInterval(timerInterval);
+      gameOver();
+    }
+  }, 1000);
 }
