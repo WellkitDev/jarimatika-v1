@@ -205,16 +205,8 @@ function validate() {
     score.innerHTML = `${userScore}`;
 
     if (userScore < 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Opss...",
-        text: "Time Out!!",
-        buttons: true,
-      }).then((isOkay) => {
-        if (isOkay) {
-          gameOver();
-        }
-      });
+      alert("Score cant be negative, Game Over!!");
+      gameOver();
     }
   }
 }
