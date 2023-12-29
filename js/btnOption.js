@@ -3,6 +3,9 @@ function play() {
   const dataPlayers = localStorage.getItem("dataPlayers");
   if (dataPlayers) {
     let data = JSON.parse(dataPlayers);
+    if (data[nickName] == null) {
+      data[nickName] = [(level = 0)];
+    }
     if (data[nickName].level > 1) {
       window.location.href = "playV2.html";
       console.log("true");

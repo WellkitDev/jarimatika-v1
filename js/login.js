@@ -12,19 +12,19 @@ function createAccount() {
     localStorage.setItem("username", nickName);
     const displayName = JSON.parse(dataPlayer);
     //cek player dengan nama inputan ada atau tidak
-    if (displayName[nickName]) {
-      Swal.fire({
-        icon: "error",
-        title: "Opss...",
-        text: "Nickname already in use ",
-      });
-    } else {
+    if (!displayName[nickName]) {
       Swal.fire({
         icon: "success",
         title: "WOW...",
         text: "Nice nickname ",
       });
       window.location.href = "menu.html";
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Opss...",
+        text: "Nickname already in use ",
+      });
     }
   } else {
     Swal.fire({

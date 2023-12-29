@@ -55,7 +55,7 @@ function checkName() {
     }
   }
 }
-
+checkName();
 function randomNum() {
   const nickName = localStorage.getItem("username");
   const dataPlayer = JSON.parse(localStorage.getItem("dataPlayers"));
