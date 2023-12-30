@@ -44,17 +44,22 @@ function handleLogin() {
   if (nickName.trim() != "") {
     const dataPlayer = localStorage.getItem("dataPlayers");
     const displayName = JSON.parse(dataPlayer);
+    let user = localStorage.getItem("username");
 
-    //cek nickname ada atau tidak
-    if (displayName[nickName]) {
-      localStorage.setItem("username", nickName);
+    if (user == nickName) {
       window.location.href = "menu.html";
     } else {
-      Swal.fire({
-        icon: "error",
-        title: "Opss...",
-        text: "Your Nickname does not exist",
-      });
+      //cek nickname ada atau tidak
+      if (displayName[nickName]) {
+        localStorage.setItem("username", nickName);
+        window.location.href = "menu.html";
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Opss...",
+          text: "Your Nickname does not exist",
+        });
+      }
     }
   } else {
     Swal.fire({

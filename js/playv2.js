@@ -158,7 +158,9 @@ questionLevel2 = () => {
     checkAnswer(switchAnswer[2]);
   });
 };
+
 questionLevel2();
+
 function checkAnswer(answer) {
   if (answer == finalAnswer) {
     questionLevel2();
@@ -185,38 +187,46 @@ function checkAnswer(answer) {
       });
     }
   } else {
-    questionLevel2();
     userScore -= 100;
     score.innerHTML = `${userScore}`;
-
-    if (userScore < 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Opss...",
-        text: "Time Out!!",
-        buttons: true,
-      }).then((isOkay) => {
-        if (isOkay) {
-          gameOver();
-        }
-      });
-    }
+    questionLevel2();
   }
-  runInterval();
+
+  if (userScore < 0) {
+    Swal.fire({
+      icon: "error",
+      title: "Opss...",
+      text: "Credit score minus.. ",
+      buttons: true,
+    }).then((isOkay) => {
+      if (isOkay) {
+        gameOver();
+      }
+    });
+  }
 }
+
+runInterval();
 
 function endGame() {
   const players = localStorage.getItem("username");
   const loadData = JSON.parse(localStorage.getItem("dataPlayers"));
   let totalScore = "";
+  let additionalScore = 0;
   let levelUp = "";
   let timeSpant = 150 - countDown;
 
+  if (userScore < 0) {
+    additionalScore = 0;
+  } else {
+    additionalScore = userScore;
+  }
+
   if (loadData[players]) {
-    totalScore = userScore + loadData[players].score;
+    totalScore = additionalScore + loadData[players].score;
     levelUp = loadData[players].level;
   } else {
-    totalScore = userScore;
+    totalScore = additionalScore;
     levelUp = levelId;
   }
 
@@ -233,14 +243,21 @@ function gameOver() {
   const players = localStorage.getItem("username");
   const loadData = JSON.parse(localStorage.getItem("dataPlayers"));
   let totalScore = "";
+  let additionalScore = 0;
   let levelUp = "";
   let timeSpant = 150 - countDown;
 
+  if (userScore < 0) {
+    additionalScore = 0;
+  } else {
+    additionalScore = userScore;
+  }
+
   if (loadData[players]) {
-    totalScore = userScore + loadData[players].score;
+    totalScore = additionalScore + loadData[players].score;
     levelUp = loadData[players].level;
   } else {
-    totalScore = userScore;
+    totalScore = additionalScore;
     levelUp = levelId;
   }
 

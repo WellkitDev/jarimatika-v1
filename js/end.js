@@ -16,7 +16,34 @@ function display() {
   }
 }
 display();
+function homeEnd() {
+  let level = dataPlayers[nickName].level;
+  let score = dataPlayers[nickName].score;
+  let timeSpant = dataPlayers[nickName].timeSpant;
+  dataPlayers[nickName] = {
+    level: level,
+    score: score,
+    timeSpant: timeSpant,
+  };
+  localStorage.setItem("dataPlayers", JSON.stringify(dataPlayers));
+  //console.log(`levelUp ${dataPlayers}`);
 
+  window.location.href = "home.html";
+}
+function highEnd() {
+  let level = dataPlayers[nickName].level;
+  let score = dataPlayers[nickName].score;
+  let timeSpant = dataPlayers[nickName].timeSpant;
+  dataPlayers[nickName] = {
+    level: level,
+    score: score,
+    timeSpant: timeSpant,
+  };
+  localStorage.setItem("dataPlayers", JSON.stringify(dataPlayers));
+  //console.log(`levelUp ${dataPlayers}`);
+
+  window.location.href = "highscore.html";
+}
 function nextLevel() {
   let level = dataPlayers[nickName].level;
   let score = dataPlayers[nickName].score;
