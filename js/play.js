@@ -103,18 +103,6 @@ function display() {
 }
 display();
 // menampilkan input img
-userInput.addEventListener("input", () => {
-  mathJariInput.innerHTML = "";
-  let numInput = document.createElement("img");
-  numInput.src = `asset/img/gambarjari_${userInput.value}.png`;
-  mathJariInput.appendChild(numInput);
-  if (userInput.value >= 100) {
-    numInput.src = `asset/img/gambarjari_.png`;
-  }
-  if (userInput.value == "") {
-    numInput.src = `asset/img/gambarjari_.png`;
-  }
-});
 
 function endGame() {
   const players = localStorage.getItem("username");
@@ -144,14 +132,21 @@ function gameOver() {
   const players = localStorage.getItem("username");
   const loadData = JSON.parse(localStorage.getItem("dataPlayers"));
   let totalScore = "";
+  let additionalScore = 0;
   let levelUp = "";
   let timeSpant = 150 - countDown;
 
+  if (userScore < 0) {
+    additionalScore = 0;
+  } else {
+    additionalScore = userScore;
+  }
+
   if (loadData[players]) {
-    totalScore = userScore + loadData[players].score;
+    totalScore = additionalScore + loadData[players].score;
     levelUp = loadData[players].level;
   } else {
-    totalScore = userScore;
+    totalScore = additionalScore;
     levelUp = levelId;
   }
 
@@ -180,6 +175,7 @@ function validate() {
     progressBarrFull.style.width = `${
       (currentQuestion / MAX_QUESTIONS) * 100
     }%`;
+
     if (currentQuestion >= 15) {
       Swal.fire({
         icon: "success",
@@ -199,24 +195,27 @@ function validate() {
       text: `Incorrect, it was answer ${correctAnswer}`,
     });
     // alert(`Incorrect, it was answer ${correctAnswer}`);
-    display();
+
     userScore -= 100;
 
     score.innerHTML = `${userScore}`;
-
-    if (userScore < 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Opss...",
-        text: "Time Out!!",
-        buttons: true,
-      }).then((isOkay) => {
-        if (isOkay) {
-          gameOver();
-        }
-      });
-    }
+    display();
   }
+
+  if (userScore < 0) {
+    Swal.fire({
+      icon: "error",
+      title: "Sorry...",
+      text: "Credit score minus.. ",
+      buttons: true,
+    }).then((isOkay) => {
+      if (isOkay) {
+        gameOver();
+      }
+    });
+  }
+  userInput.value = "";
+  mathJariInput.innerHTML = "";
 }
 
 function runInterval() {
@@ -238,7 +237,16 @@ function runInterval() {
   }, 1000);
 }
 
-checkAnswerBtn.addEventListener("click", validate);
+userInput.addEventListener("input", (e) => {
+  mathJariInput.innerHTML = "";
+  let numInput = document.createElement("img");
+  numInput.src = `asset/img/gambarjari_${userInput.value}.png`;
+  mathJariInput.appendChild(numInput);
+  if (userInput.value >= 100) {
+    numInput.src = `asset/img/gambarjari_.png`;
+  }
+  checkAnswerBtn.disabled = !userInput.value;
+});
 
 userInput.addEventListener("keyup", (e) => {
   if (!inputted) {
@@ -248,4 +256,16 @@ userInput.addEventListener("keyup", (e) => {
   if (e.key == "Enter") {
     validate();
   }
+  checkAnswerBtn.disabled = !userInput.value;
 });
+
+checkAnswerBtn.addEventListener("click", () => {
+  if (!inputted) {
+    validate();
+    inputted = true;
+  }
+});
+checkAnswer = (e) => {
+  e.preventDefault();
+  validate();
+};
