@@ -50,37 +50,20 @@
 
             <div class="card-content">
                 <div class="card-column">
-                    <h1>Berapa hasil perhitungan dibawah ini?</h1>
-                    <div class="display row d-flex justify-content-center align-items-center mb-3">
-                        <div class="display-item col-6 d-flex align-items-center" id="mathJari">
-                            <!-- display finalAnswer -->
-                        </div>
-
-                        <div class="display-item col-3" id="mathJariInput1">
+                    <h1 class="mb-4">Berapa hasil perhitungan dibawah ini?</h1>
+                    <div class="display row justify-content-center">
+                        <!-- display finalAnswer -->
+                        <div class="display-item col-4 d-flex align-items-center" id="question-container"></div>
+                        <div class="display-item col-2 d-flex align-items-center" id="mathJariInput1">
                             <h1>=</h1>
                             <h1>?</h1>
                         </div>
+                        <div class="col-4 align-items-center" id="options-container"></div>
                     </div>
-                    <div class="display-column " id="quiz1">
-                        <div class="answer-group mb-4" id="answer-group">
-                            <h1 id="choice1" class="me-2">A</h1>
-                            <div id="option1" data-number="1"></div>
-                        </div>
-                        <div class="answer-group mb-4" id="answer-group">
-                            <h1 id="choice1" class="me-2">B</h1>
-                            <div id="option2" data-number="2"></div>
-                        </div>
-                        <div class="answer-group mb-4" id="answer-group">
-                            <h1 id="choice1" class="me-2">C</h1>
-                            <div id="option3" data-number="3"></div>
-                        </div>
 
-
-
-                    </div>
                 </div>
             </div>
-            <div class="timer">
+            <div class="timer mb-2">
                 <div id="progressTimer">
                     <div id="progressTimerBar"></div>
                 </div>
@@ -97,7 +80,7 @@
 
 
 
-    <script src="js/playv2.js"></script>
+    <script src="js/pilihanGanda.js"></script>
     <script src="js/btnOption.js"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
